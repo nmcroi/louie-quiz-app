@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🎮 Spelenderwijs Leren - Demo</title>
+  <style>
+:root {
+  --primary: #4e9cff;
+  --btn-text: #fff;
+  --gold: #ffd700;
+  --green: #51c271;
+  --red: #e96d6d;
+  --purple: #8b5cf6;
+  --orange: #f97316;
+  --gaming-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+body{
+  font-family:system-ui, sans-serif;
+  margin:0;
+  padding:0;
+  background: var(--gaming-bg);
+  min-height: 100vh;
+}
+
+section{
+  max-width:420px;
+  margin:2rem auto;
+  margin-top:5rem;
+  padding:1.5rem;
+  background:#fff;
+  border-radius:16px;
+  box-shadow: var(--shadow);
+  text-align:center;
+}
+
+button{
+  display:inline-block;
+  margin:.5rem;
+  padding:.75rem 1.5rem;
+  border:none;
+  border-radius:12px;
+  font-size:1.1rem;
+  cursor:pointer;
+  background:var(--primary);
+  color:var(--btn-text);
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+button:hover{
+  filter:brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+input{
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 0.5rem;
+  width: 150px;
+  text-align: center;
+}
+
+#plaatje{max-width:200px;margin:1rem auto; display:block;}
+.correct{background:var(--green) !important; animation: pulse 0.6s;}
+.fout{background:var(--red) !important; animation: shake 0.6s;}
+
+#feedback{
+  font-weight: bold;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-radius: 8px;
+  min-height: 24px;
+}
+
+/* GAMING REWARDS BAR */
+#rewards-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 100;
+  font-weight: bold;
+}
+
+.rewards-left, .rewards-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#level-display { color: var(--gold); font-size: 1.1rem; }
+#points-display { color: var(--purple); font-size: 1.1rem; }
+#streak-display { color: var(--orange); font-size: 1.1rem; }
+
+#xp-bar {
+  width: 100px;
+  height: 8px;
+  background: #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#xp-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--orange));
+  width: 0%;
+  transition: width 0.8s ease;
+}
+
+/* POPUPS */
+#achievement-popup, #levelup-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeIn 0.3s ease;
+}
+
+#achievement-popup.show, #levelup-popup.show {
+  display: flex;
+}
+
+.popup-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 300px;
+  animation: popIn 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.popup-content h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+#close-popup, #close-levelup {
+  background: var(--green);
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+}
+
+/* STATS */
+#stats-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+#achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.achievement {
+  background: #f3f4f6;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid #e5e7eb;
+  opacity: 0.5;
+}
+
+.achievement.unlocked {
+  background: linear-gradient(135deg, #fef3c7, #fbbf24);
+  border-color: var(--gold);
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.achievement-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  filter: grayscale(100%);
+}
+
+.achievement.unlocked .achievement-icon {
+  filter: grayscale(0%);
+}
+
+.achievement-name {
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.achievement-desc {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* ANIMATIONS */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 480px) {
+  #rewards-bar {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .rewards-left, .rewards-right {
+    gap: 0.5rem;
+  }
+
+  #xp-bar {
+    width: 60px;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- REWARDS BAR -->
+  <div id="rewards-bar">
+    <div class="rewards-left">
+      <span id="level-display">🏆 Level 1</span>
+      <span id="points-display">⭐ 0 pts</span>
+    </div>
+    <div class="rewards-right">
+      <span id="streak-display">🔥 0</span>
+      <div id="xp-bar">
+        <div id="xp-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFIEL KEUZE -->
+  <section id="profile">
+    <h1>🎮 Kies je profiel</h1>
+    <button data-age="6">Ben jij Elio (6 jaar)</button>
+    <button data-age="10">Ben jij Louie (10 jaar)</button>
+  </section>
+
+  <!-- CATEGORIE KEUZE -->
+  <section id="cats" style="display:none;">
+    <h1>Kies een categorie</h1>
+    <div id="cat-buttons"></div>
+    <button id="terug">← Terug</button>
+    <button id="stats-btn">📊 Mijn Stats</button>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" style="display:none;">
+    <h2 id="vraagtekst"></h2>
+    <img id="plaatje" alt="">
+    <div id="antwoorden"></div>
+    <p id="feedback"></p>
+    <button id="volgende" style="display:none;">Volgende ➜</button>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats" style="display:none;">
+    <h1>🏆 Jouw Prestaties</h1>
+    <div id="stats-overview"></div>
+    <h2>🎖️ Achievements</h2>
+    <div id="achievements-grid"></div>
+    <button id="back-to-cats">← Terug</button>
+  </section>
+
+  <!-- ACHIEVEMENT POPUP -->
+  <div id="achievement-popup">
+    <div class="popup-content">
+      <h2>🎉 Nieuwe Achievement!</h2>
+      <div id="achievement-details"></div>
+      <button id="close-popup">Geweldig! 🚀</button>
+    </div>
+  </div>
+
+  <!-- LEVEL UP POPUP -->
+  <div id="levelup-popup">
+    <div class="popup-content">
+      <h2>⭐ LEVEL UP! ⭐</h2>
+      <div id="levelup-details"></div>
+      <button id="close-levelup">AWESOME! 🔥</button>
+    </div>
+  </div>
+
+  <script>
+// EMBEDDED QUIZ DATA
+const QUIZ_DATA = {
+  tafels: [{"id":"g5_tafels_001","leeftijd":10,"categorie":"tafels","type":"invul","vraag":"6 × 7 = ___","antwoord":"42","moeilijk":2,"hint":"Denk aan: 6 × 6 = 36, dan nog 6 erbij","uitleg":"6 × 7 = 42. Je kunt dit onthouden als 'zes keer zeven is tweeënveertig!'"},{"id":"g5_tafels_002","leeftijd":10,"categorie":"tafels","type":"mcq","vraag":"8 × 9 = ?","opties":["72","81","64","63"],"antwoord":"72","moeilijk":3,"hint":"8 × 10 = 80, dan 8 eraf","uitleg":"8 × 9 = 72. Denk aan: 8 × 10 = 80, minus 8 = 72"},{"id":"g5_tafels_003","leeftijd":10,"categorie":"tafels","type":"invul","vraag":"7 × 8 = ___","antwoord":"56","moeilijk":2,"hint":"Dit is hetzelfde als 8 × 7","uitleg":"7 × 8 = 56. Een handige truc: zing het liedje 'zeven acht is zesenvijftig!'"},{"id":"g5_tafels_004","leeftijd":10,"categorie":"tafels","type":"mcq","vraag":"9 × 6 = ?","opties":["52","54","56","58"],"antwoord":"54","moeilijk":2,"hint":"9 × 6 is hetzelfde als 6 × 9","uitleg":"9 × 6 = 54. Je kunt dit ook rekenen als (10 × 6) - 6 = 60 - 6 = 54"},{"id":"g5_tafels_005","leeftijd":10,"categorie":"tafels","type":"invul","vraag":"4 × 9 = ___","antwoord":"36","moeilijk":1,"hint":"4 × 10 = 40, dan 4 eraf","uitleg":"4 × 9 = 36. Makkelijke truc: 4 × 10 = 40, dan 4 eraf = 36"},{"id":"g5_tafels_006","leeftijd":10,"categorie":"tafels","type":"mcq","vraag":"12 × 3 = ?","opties":["36","35","33","39"],"antwoord":"36","moeilijk":2,"hint":"12 × 3 is hetzelfde als 3 × 12","uitleg":"12 × 3 = 36. Je kunt dit rekenen als (10 × 3) + (2 × 3) = 30 + 6 = 36"},{"id":"g5_tafels_007","leeftijd":10,"categorie":"tafels","type":"invul","vraag":"11 × 4 = ___","antwoord":"44","moeilijk":2,"hint":"Bij 11 × kun je de cijfers vaak verdubbelen","uitleg":"11 × 4 = 44. Handig: bij 11 × een-cijferig getal zie je vaak het cijfer dubbel!"},{"id":"g5_tafels_008","leeftijd":10,"categorie":"tafels","type":"mcq","vraag":"7 × 7 = ?","opties":["49","48","47","50"],"antwoord":"49","moeilijk":2,"hint":"Dit is 7 kwadraat","uitleg":"7 × 7 = 49. Dit is een kwadraat - zeven in het kwadraat!"},{"id":"g5_tafels_009","leeftijd":10,"categorie":"tafels","type":"invul","vraag":"6 × 8 = ___","antwoord":"48","moeilijk":2,"hint":"6 × 8 is hetzelfde als 8 × 6","uitleg":"6 × 8 = 48. Denk aan: 6 × 8 = 48, rijmt op 'zes keer acht, dat is echt!'"},{"id":"g5_tafels_010","leeftijd":10,"categorie":"tafels","type":"mcq","vraag":"9 × 9 = ?","opties":["81","80","82","79"],"antwoord":"81","moeilijk":3,"hint":"Dit is 9 kwadraat","uitleg":"9 × 9 = 81. Het grootste één-cijfer kwadraat!"},{"id":"g5_tafels_011","leeftijd":10,"categorie":"tafels","type":"invul","vraag":"5 × 7 = ___","antwoord":"35","moeilijk":1,"hint":"Alle antwoorden van 5× eindigen op 0 of 5","uitleg":"5 × 7 = 35. Bij de tafel van 5 eindigt het antwoord altijd op 0 of 5!"},{"id":"g5_tafels_012","leeftijd":10,"categorie":"tafels","type":"mcq","vraag":"8 × 7 = ?","opties":["54","56","58","52"],"antwoord":"56","moeilijk":2,"hint":"Dit is hetzelfde als 7 × 8","uitleg":"8 × 7 = 56. Hetzelfde als 7 × 8 - vermenigvuldigen kan je omdraaien!"}],
+  delen: [{"id":"g5_delen_001","leeftijd":10,"categorie":"delen","type":"invul","vraag":"42 ÷ 6 = ___","antwoord":"7","moeilijk":2,"hint":"Denk aan: 6 × ? = 42","uitleg":"42 ÷ 6 = 7. Dit is de omgekeerde van 6 × 7 = 42!"},{"id":"g5_delen_002","leeftijd":10,"categorie":"delen","type":"mcq","vraag":"72 ÷ 8 = ?","opties":["9","8","7","10"],"antwoord":"9","moeilijk":2,"hint":"8 × ? = 72","uitleg":"72 ÷ 8 = 9. Denk aan de tafel van 8: 8 × 9 = 72"},{"id":"g5_delen_003","leeftijd":10,"categorie":"delen","type":"invul","vraag":"56 ÷ 7 = ___","antwoord":"8","moeilijk":2,"hint":"7 × ? = 56","uitleg":"56 ÷ 7 = 8. De omgekeerde van 7 × 8 = 56"},{"id":"g5_delen_004","leeftijd":10,"categorie":"delen","type":"mcq","vraag":"54 ÷ 9 = ?","opties":["5","6","7","8"],"antwoord":"6","moeilijk":2,"hint":"9 × ? = 54","uitleg":"54 ÷ 9 = 6. Uit de tafel van 9: 9 × 6 = 54"},{"id":"g5_delen_005","leeftijd":10,"categorie":"delen","type":"invul","vraag":"36 ÷ 4 = ___","antwoord":"9","moeilijk":1,"hint":"4 × ? = 36","uitleg":"36 ÷ 4 = 9. Uit de tafel van 4: 4 × 9 = 36"},{"id":"g5_delen_006","leeftijd":10,"categorie":"delen","type":"mcq","vraag":"48 ÷ 6 = ?","opties":["7","8","9","6"],"antwoord":"8","moeilijk":2,"hint":"6 × ? = 48","uitleg":"48 ÷ 6 = 8. De omgekeerde van 6 × 8 = 48"},{"id":"g5_delen_007","leeftijd":10,"categorie":"delen","type":"invul","vraag":"44 ÷ 11 = ___","antwoord":"4","moeilijk":2,"hint":"11 × ? = 44","uitleg":"44 ÷ 11 = 4. Herken je het patroon bij 11? 11 × 4 = 44"},{"id":"g5_delen_008","leeftijd":10,"categorie":"delen","type":"mcq","vraag":"49 ÷ 7 = ?","opties":["6","7","8","9"],"antwoord":"7","moeilijk":2,"hint":"7 × ? = 49","uitleg":"49 ÷ 7 = 7. Dit is 7 × 7 = 49, dus 49 ÷ 7 = 7"},{"id":"g5_delen_009","leeftijd":10,"categorie":"delen","type":"invul","vraag":"81 ÷ 9 = ___","antwoord":"9","moeilijk":3,"hint":"9 × ? = 81","uitleg":"81 ÷ 9 = 9. Dit is 9 × 9 = 81, dus 81 ÷ 9 = 9"},{"id":"g5_delen_010","leeftijd":10,"categorie":"delen","type":"mcq","vraag":"35 ÷ 5 = ?","opties":["6","7","8","9"],"antwoord":"7","moeilijk":1,"hint":"5 × ? = 35","uitleg":"35 ÷ 5 = 7. Uit de tafel van 5: 5 × 7 = 35"},{"id":"g5_delen_011","leeftijd":10,"categorie":"delen","type":"invul","vraag":"24 ÷ 3 = ___","antwoord":"8","moeilijk":1,"hint":"3 × ? = 24","uitleg":"24 ÷ 3 = 8. Uit de tafel van 3: 3 × 8 = 24"},{"id":"g5_delen_012","leeftijd":10,"categorie":"delen","type":"mcq","vraag":"63 ÷ 7 = ?","opties":["8","9","10","7"],"antwoord":"9","moeilijk":2,"hint":"7 × ? = 63","uitleg":"63 ÷ 7 = 9. Uit de tafel van 7: 7 × 9 = 63"},{"id":"g5_delen_013","leeftijd":10,"categorie":"delen","type":"invul","vraag":"100 ÷ 10 = ___","antwoord":"10","moeilijk":1,"hint":"Door 10 delen = laatste cijfer weghalen","uitleg":"100 ÷ 10 = 10. Bij delen door 10 haal je gewoon het laatste cijfer weg!"},{"id":"g5_delen_014","leeftijd":10,"categorie":"delen","type":"mcq","vraag":"60 ÷ 12 = ?","opties":["4","5","6","7"],"antwoord":"5","moeilijk":3,"hint":"12 × ? = 60","uitleg":"60 ÷ 12 = 5. Een beetje moeilijker: 12 × 5 = 60"}]
+};
+
+// ACHIEVEMENTS DEFINITION
+const ACHIEVEMENTS = [
+  { id: 'first_correct', icon: '🎯', name: 'Eerste Goed!', desc: 'Je eerste goede antwoord', check: (r) => r.totalCorrect >= 1 },
+  { id: 'streak_3', icon: '🔥', name: '3-Dag Streak!', desc: '3 dagen op rij gespeeld', check: (r) => r.streak >= 3 },
+  { id: 'streak_7', icon: '⚡', name: 'Week Warrior!', desc: '7 dagen op rij gespeeld', check: (r) => r.streak >= 7 },
+  { id: 'level_5', icon: '⭐', name: 'Level 5!', desc: 'Level 5 bereikt', check: (r) => r.level >= 5 },
+  { id: 'level_10', icon: '🏆', name: 'Level 10!', desc: 'Level 10 bereikt', check: (r) => r.level >= 10 },
+  { id: 'points_100', icon: '💯', name: 'Honderd Punten!', desc: '100 punten verzameld', check: (r) => r.points >= 100 },
+  { id: 'points_500', icon: '🚀', name: 'Vijfhonderd!', desc: '500 punten verzameld', check: (r) => r.points >= 500 },
+  { id: 'perfect_10', icon: '🎪', name: 'Perfect 10!', desc: '10 vragen op rij goed', check: (r) => r.correctStreak >= 10 },
+];
+
+// STATE
+let currentAge = null;
+let currentCategory = null;
+let currentQuestions = [];
+let currentQuestion = null;
+let questionIndex = 0;
+
+// STORAGE KEY
+const STORAGE_KEY = 'spelenderwijs-demo';
+
+// GET REWARDS DATA
+function getRewards() {
+  const data = localStorage.getItem(STORAGE_KEY);
+  if (!data) {
+    return {
+      points: 0,
+      level: 1,
+      totalCorrect: 0,
+      totalAnswered: 0,
+      correctStreak: 0,
+      streak: 0,
+      lastPlayed: null,
+      unlockedAchievements: []
+    };
+  }
+  return JSON.parse(data);
+}
+
+// SAVE REWARDS DATA
+function saveRewards(rewards) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(rewards));
+}
+
+// UPDATE REWARDS DISPLAY
+function updateRewardsDisplay() {
+  const rewards = getRewards();
+  const xpInLevel = rewards.points % 100;
+  const xpPercent = (xpInLevel / 100) * 100;
+
+  document.getElementById('level-display').textContent = `🏆 Level ${rewards.level}`;
+  document.getElementById('points-display').textContent = `⭐ ${rewards.points} pts`;
+  document.getElementById('streak-display').textContent = `🔥 ${rewards.streak}`;
+  document.getElementById('xp-progress').style.width = `${xpPercent}%`;
+}
+
+// CHECK AND UNLOCK ACHIEVEMENTS
+function checkAchievements(oldRewards, newRewards) {
+  const newUnlocks = [];
+
+  ACHIEVEMENTS.forEach(achievement => {
+    // Skip if already unlocked
+    if (oldRewards.unlockedAchievements.includes(achievement.id)) return;
+
+    // Check if should unlock now
+    if (achievement.check(newRewards)) {
+      newRewards.unlockedAchievements.push(achievement.id);
+      newUnlocks.push(achievement);
+    }
+  });
+
+  return newUnlocks;
+}
+
+// SHOW ACHIEVEMENT POPUP
+function showAchievementPopup(achievement) {
+  const popup = document.getElementById('achievement-popup');
+  const details = document.getElementById('achievement-details');
+
+  details.innerHTML = `
+    <div style="font-size: 4rem;">${achievement.icon}</div>
+    <h3>${achievement.name}</h3>
+    <p>${achievement.desc}</p>
+  `;
+
+  popup.classList.add('show');
+}
+
+// SHOW LEVEL UP POPUP
+function showLevelUpPopup(newLevel) {
+  const popup = document.getElementById('levelup-popup');
+  const details = document.getElementById('levelup-details');
+
+  details.innerHTML = `
+    <div style="font-size: 4rem;">🏆</div>
+    <h3>Je bent nu Level ${newLevel}!</h3>
+    <p>Blijf zo doorgaan! 💪</p>
+  `;
+
+  popup.classList.add('show');
+}
+
+// UPDATE STREAK
+function updateStreak(rewards) {
+  const today = new Date().toDateString();
+  const lastPlayed = rewards.lastPlayed ? new Date(rewards.lastPlayed).toDateString() : null;
+
+  if (lastPlayed === today) {
+    // Same day, no change
+    return;
+  }
+
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayStr = yesterday.toDateString();
+
+  if (lastPlayed === yesterdayStr) {
+    // Consecutive day
+    rewards.streak++;
+  } else if (lastPlayed !== today) {
+    // Break in streak
+    rewards.streak = 1;
+  }
+
+  rewards.lastPlayed = new Date().toISOString();
+}
+
+// SAVE RESULT
+function saveResult(correct) {
+  const oldRewards = getRewards();
+  const newRewards = {...oldRewards};
+
+  const oldLevel = newRewards.level;
+
+  newRewards.totalAnswered++;
+
+  if (correct) {
+    newRewards.points += 10;
+    newRewards.totalCorrect++;
+    newRewards.correctStreak++;
+
+    // Calculate level
+    newRewards.level = Math.floor(newRewards.points / 100) + 1;
+  } else {
+    newRewards.correctStreak = 0;
+  }
+
+  // Update streak
+  updateStreak(newRewards);
+
+  // Check achievements
+  const newAchievements = checkAchievements(oldRewards, newRewards);
+
+  // Save
+  saveRewards(newRewards);
+  updateRewardsDisplay();
+
+  // Show popups
+  if (newRewards.level > oldLevel) {
+    setTimeout(() => showLevelUpPopup(newRewards.level), 500);
+  }
+
+  newAchievements.forEach((achievement, idx) => {
+    setTimeout(() => showAchievementPopup(achievement), 1000 + (idx * 500));
+  });
+}
+
+// SHUFFLE ARRAY
+function shuffle(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+// SELECT QUESTION (sorted by difficulty)
+function selectQuestion(questions) {
+  const sorted = [...questions].sort((a, b) => a.moeilijk - b.moeilijk);
+  return sorted[questionIndex] || sorted[0];
+}
+
+// SHOW QUESTION
+function showQuestion(question) {
+  currentQuestion = question;
+
+  const vraagEl = document.getElementById('vraagtekst');
+  const plaatjeEl = document.getElementById('plaatje');
+  const antwoordenEl = document.getElementById('antwoorden');
+  const feedbackEl = document.getElementById('feedback');
+  const volgendeBtn = document.getElementById('volgende');
+
+  vraagEl.textContent = question.vraag;
+  plaatjeEl.src = question.plaatje || '';
+  plaatjeEl.style.display = question.plaatje ? 'block' : 'none';
+  antwoordenEl.innerHTML = '';
+  feedbackEl.textContent = '';
+  volgendeBtn.style.display = 'none';
+
+  if (question.type === 'invul') {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Typ je antwoord';
+    input.id = 'answer-input';
+    antwoordenEl.appendChild(input);
+
+    const btn = document.createElement('button');
+    btn.textContent = 'Controleer';
+    btn.onclick = () => checkAnswer(input.value, btn);
+    antwoordenEl.appendChild(btn);
+
+    // Enter key to submit
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') btn.click();
+    });
+
+    input.focus();
+  } else {
+    const shuffled = shuffle(question.opties);
+    shuffled.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.textContent = opt;
+      btn.onclick = () => checkAnswer(opt, btn);
+      antwoordenEl.appendChild(btn);
+    });
+  }
+
+  if (question.hint) {
+    const hint = document.createElement('div');
+    hint.textContent = '💡 ' + question.hint;
+    hint.style.fontStyle = 'italic';
+    hint.style.margin = '1rem 0';
+    hint.style.color = '#666';
+    antwoordenEl.appendChild(hint);
+  }
+}
+
+// CHECK ANSWER
+function checkAnswer(userAnswer, btn) {
+  if (!userAnswer || !userAnswer.trim()) return;
+
+  const correct = userAnswer.trim().toLowerCase() === currentQuestion.antwoord.toLowerCase();
+  const feedbackEl = document.getElementById('feedback');
+  const volgendeBtn = document.getElementById('volgende');
+
+  // Save result and update rewards
+  saveResult(correct);
+
+  // Show feedback
+  if (correct) {
+    feedbackEl.textContent = '🎉 Geweldig! +10 punten';
+    feedbackEl.style.background = '#d1fae5';
+    feedbackEl.style.color = '#065f46';
+    btn.classList.add('correct');
+  } else {
+    feedbackEl.innerHTML = `❌ Helaas, het juiste antwoord is: <strong>${currentQuestion.antwoord}</strong>`;
+    if (currentQuestion.uitleg) {
+      feedbackEl.innerHTML += `<br><br>${currentQuestion.uitleg}`;
+    }
+    feedbackEl.style.background = '#fee2e2';
+    feedbackEl.style.color = '#991b1b';
+    btn.classList.add('fout');
+  }
+
+  // Disable all buttons
+  const buttons = document.getElementById('antwoorden').querySelectorAll('button');
+  buttons.forEach(b => b.disabled = true);
+
+  const input = document.getElementById('answer-input');
+  if (input) input.disabled = true;
+
+  volgendeBtn.style.display = 'inline-block';
+}
+
+// NEXT QUESTION
+function nextQuestion() {
+  questionIndex++;
+
+  if (questionIndex >= currentQuestions.length) {
+    // Quiz finished
+    const quizSection = document.getElementById('quiz');
+    quizSection.innerHTML = `
+      <h1>🎉 Geweldig gedaan!</h1>
+      <p>Je hebt alle vragen beantwoord!</p>
+      <button onclick="showCategories()">← Kies een andere categorie</button>
+      <button onclick="showStats()">📊 Bekijk je stats</button>
+    `;
+    return;
+  }
+
+  const question = selectQuestion(currentQuestions);
+  showQuestion(question);
+}
+
+// START QUIZ
+function startQuiz(category) {
+  currentCategory = category;
+  currentQuestions = QUIZ_DATA[category];
+  questionIndex = 0;
+
+  document.getElementById('cats').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+
+  showQuestion(selectQuestion(currentQuestions));
+}
+
+// SHOW CATEGORIES
+function showCategories() {
+  document.getElementById('profile').style.display = 'none';
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('stats').style.display = 'none';
+
+  const catsSection = document.getElementById('cats');
+  catsSection.style.display = 'block';
+
+  const catButtons = document.getElementById('cat-buttons');
+  catButtons.innerHTML = '';
+
+  const categories = [
+    { id: 'tafels', name: '🔢 Tafels van Vermenigvuldiging', color: '#4e9cff' },
+    { id: 'delen', name: '➗ Delen', color: '#f97316' }
+  ];
+
+  categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.textContent = cat.name;
+    btn.style.background = cat.color;
+    btn.onclick = () => startQuiz(cat.id);
+    catButtons.appendChild(btn);
+  });
+}
+
+// SHOW STATS
+function showStats() {
+  const rewards = getRewards();
+  const accuracy = rewards.totalAnswered > 0
+    ? Math.round((rewards.totalCorrect / rewards.totalAnswered) * 100)
+    : 0;
+
+  document.getElementById('cats').style.display = 'none';
+  document.getElementById('quiz').style.display = 'none';
+
+  const statsSection = document.getElementById('stats');
+  statsSection.style.display = 'block';
+
+  // Stats overview
+  const overview = document.getElementById('stats-overview');
+  overview.innerHTML = `
+    <div class="stat-card">
+      <div class="stat-number">${rewards.points}</div>
+      <div class="stat-label">Totaal Punten</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">${rewards.level}</div>
+      <div class="stat-label">Level</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">${rewards.streak}</div>
+      <div class="stat-label">Dag Streak</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">${accuracy}%</div>
+      <div class="stat-label">Accuracy</div>
+    </div>
+  `;
+
+  // Achievements grid
+  const grid = document.getElementById('achievements-grid');
+  grid.innerHTML = '';
+
+  ACHIEVEMENTS.forEach(achievement => {
+    const unlocked = rewards.unlockedAchievements.includes(achievement.id);
+    const div = document.createElement('div');
+    div.className = 'achievement' + (unlocked ? ' unlocked' : '');
+    div.innerHTML = `
+      <div class="achievement-icon">${achievement.icon}</div>
+      <div class="achievement-name">${achievement.name}</div>
+      <div class="achievement-desc">${achievement.desc}</div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+// EVENT LISTENERS
+document.getElementById('profile').addEventListener('click', (e) => {
+  if (e.target.dataset.age) {
+    currentAge = Number(e.target.dataset.age);
+    showCategories();
+  }
+});
+
+document.getElementById('terug').addEventListener('click', () => {
+  document.getElementById('cats').style.display = 'none';
+  document.getElementById('profile').style.display = 'block';
+});
+
+document.getElementById('stats-btn').addEventListener('click', showStats);
+document.getElementById('back-to-cats').addEventListener('click', showCategories);
+
+document.getElementById('volgende').addEventListener('click', nextQuestion);
+
+document.getElementById('close-popup').addEventListener('click', () => {
+  document.getElementById('achievement-popup').classList.remove('show');
+});
+
+document.getElementById('close-levelup').addEventListener('click', () => {
+  document.getElementById('levelup-popup').classList.remove('show');
+});
+
+// INIT
+updateRewardsDisplay();
+  </script>
+</body>
+</html>
