@@ -1,0 +1,140 @@
+[
+  {
+    "id": "g5_tafels_001",
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "invul",
+    "vraag": "6 × 7 = ___",
+    "antwoord": "42",
+    "moeilijk": 2,
+    "hint": "Denk aan: 6 × 6 = 36, dan nog 6 erbij",
+    "uitleg": "6 × 7 = 42. Je kunt dit onthouden als 'zes keer zeven is tweeënveertig!'"
+  },
+  {
+    "id": "g5_tafels_002", 
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "mcq",
+    "vraag": "8 × 9 = ?",
+    "opties": ["72", "81", "64", "63"],
+    "antwoord": "72",
+    "moeilijk": 3,
+    "hint": "8 × 10 = 80, dan 8 eraf",
+    "uitleg": "8 × 9 = 72. Denk aan: 8 × 10 = 80, minus 8 = 72"
+  },
+  {
+    "id": "g5_tafels_003",
+    "leeftijd": 10,
+    "categorie": "tafels", 
+    "type": "invul",
+    "vraag": "7 × 8 = ___",
+    "antwoord": "56",
+    "moeilijk": 2,
+    "hint": "Dit is hetzelfde als 8 × 7",
+    "uitleg": "7 × 8 = 56. Een handige truc: zing het liedje 'zeven acht is zesenvijftig!'"
+  },
+  {
+    "id": "g5_tafels_004",
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "mcq", 
+    "vraag": "9 × 6 = ?",
+    "opties": ["52", "54", "56", "58"],
+    "antwoord": "54",
+    "moeilijk": 2,
+    "hint": "9 × 6 is hetzelfde als 6 × 9",
+    "uitleg": "9 × 6 = 54. Je kunt dit ook rekenen als (10 × 6) - 6 = 60 - 6 = 54"
+  },
+  {
+    "id": "g5_tafels_005",
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "invul",
+    "vraag": "4 × 9 = ___", 
+    "antwoord": "36",
+    "moeilijk": 1,
+    "hint": "4 × 10 = 40, dan 4 eraf",
+    "uitleg": "4 × 9 = 36. Makkelijke truc: 4 × 10 = 40, dan 4 eraf = 36"
+  },
+  {
+    "id": "g5_tafels_006",
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "mcq",
+    "vraag": "12 × 3 = ?",
+    "opties": ["36", "35", "33", "39"],
+    "antwoord": "36", 
+    "moeilijk": 2,
+    "hint": "12 × 3 is hetzelfde als 3 × 12",
+    "uitleg": "12 × 3 = 36. Je kunt dit rekenen als (10 × 3) + (2 × 3) = 30 + 6 = 36"
+  },
+  {
+    "id": "g5_tafels_007",
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "invul",
+    "vraag": "11 × 4 = ___",
+    "antwoord": "44",
+    "moeilijk": 2,
+    "hint": "Bij 11 × kun je de cijfers vaak verdubbelen",
+    "uitleg": "11 × 4 = 44. Handig: bij 11 × een-cijferig getal zie je vaak het cijfer dubbel!"
+  },
+  {
+    "id": "g5_tafels_008",
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "mcq",
+    "vraag": "7 × 7 = ?",
+    "opties": ["49", "48", "47", "50"],
+    "antwoord": "49",
+    "moeilijk": 2,
+    "hint": "Dit is 7 kwadraat",
+    "uitleg": "7 × 7 = 49. Dit is een kwadraat - zeven in het kwadraat!"
+  },
+  {
+    "id": "g5_tafels_009",
+    "leeftijd": 10,
+    "categorie": "tafels", 
+    "type": "invul",
+    "vraag": "6 × 8 = ___",
+    "antwoord": "48",
+    "moeilijk": 2,
+    "hint": "6 × 8 is hetzelfde als 8 × 6",
+    "uitleg": "6 × 8 = 48. Denk aan: 6 × 8 = 48, rijmt op 'zes keer acht, dat is echt!'"
+  },
+  {
+    "id": "g5_tafels_010",
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "mcq",
+    "vraag": "9 × 9 = ?",
+    "opties": ["81", "80", "82", "79"], 
+    "antwoord": "81",
+    "moeilijk": 3,
+    "hint": "Dit is 9 kwadraat",
+    "uitleg": "9 × 9 = 81. Het grootste één-cijfer kwadraat!"
+  },
+  {
+    "id": "g5_tafels_011",
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "invul",
+    "vraag": "5 × 7 = ___",
+    "antwoord": "35",
+    "moeilijk": 1,
+    "hint": "Alle antwoorden van 5× eindigen op 0 of 5",
+    "uitleg": "5 × 7 = 35. Bij de tafel van 5 eindigt het antwoord altijd op 0 of 5!"
+  },
+  {
+    "id": "g5_tafels_012",
+    "leeftijd": 10,
+    "categorie": "tafels",
+    "type": "mcq",
+    "vraag": "8 × 7 = ?",
+    "opties": ["54", "56", "58", "52"],
+    "antwoord": "56",
+    "moeilijk": 2,
+    "hint": "Dit is hetzelfde als 7 × 8",
+    "uitleg": "8 × 7 = 56. Hetzelfde als 7 × 8 - vermenigvuldigen kan je omdraaien!"
+  }
+]

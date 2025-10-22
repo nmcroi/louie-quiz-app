@@ -1,0 +1,14 @@
+[
+  {
+    "id": "g5_rekenen_001",
+    "leeftijd": 10,
+    "categorie": "Rekenen",
+    "kleur": "#4e9cff",
+    "type": "invul",
+    "vraag": "7 × 8 = ___",
+    "antwoord": "56",
+    "hint": "Denk aan de tafel van 8.",
+    "uitleg": "7 keer 8 is 56.",
+    "moeilijk": 2
+  }
+] 

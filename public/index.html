@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spelenderwijs Leren</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- gaming dashboard (altijd zichtbaar tijdens quiz) -->
+  <div id="rewards-bar" hidden>
+    <div class="rewards-left">
+      <span id="level-display">🏆 Level 1</span>
+      <span id="points-display">⭐ 0 pts</span>
+    </div>
+    <div class="rewards-right">
+      <span id="streak-display">🔥 0</span>
+      <div id="xp-bar">
+        <div id="xp-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- profielkeuze -->
+  <section id="profile">
+    <h1>🎮 Kies je profiel</h1>
+    <button data-age="6">Ben jij Elio</button>
+    <button data-age="10">Ben jij Louie</button>
+  </section>
+
+  <!-- quiz -->
+  <section id="quiz" hidden>
+    <h2 id="vraagtekst"></h2>
+    <img id="plaatje" alt="">
+    <div id="antwoorden"></div>
+    <p id="feedback"></p>
+    <button id="volgende" hidden>Volgende ➜</button>
+  </section>
+
+  <section id="cats" hidden>
+    <h1>Kies een categorie</h1>
+    <div id="cat-buttons"></div>
+    <button id="terug" hidden>← Profielen</button>
+    <button id="stats-btn" hidden>📊 Mijn Stats</button>
+  </section>
+
+  <!-- stats/achievements overzicht -->
+  <section id="stats" hidden>
+    <h1>🏆 Jouw Prestaties</h1>
+    <div id="stats-overview"></div>
+    <h2>🎖️ Achievements</h2>
+    <div id="achievements-grid"></div>
+    <button id="back-to-cats">← Terug</button>
+  </section>
+
+  <!-- achievement popup -->
+  <div id="achievement-popup" style="display: none;">
+    <div class="popup-content">
+      <h2>🎉 Nieuwe Achievement!</h2>
+      <div id="achievement-details"></div>
+      <button id="close-popup">Geweldig! 🚀</button>
+    </div>
+  </div>
+
+  <!-- level up popup -->
+  <div id="levelup-popup" style="display: none;">
+    <div class="popup-content">
+      <h2>⭐ LEVEL UP! ⭐</h2>
+      <div id="levelup-details"></div>
+      <button id="close-levelup">AWESOME! 🔥</button>
+    </div>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html> 

@@ -1,0 +1,163 @@
+[
+  {
+    "id": "g5_delen_001",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "invul", 
+    "vraag": "42 ÷ 6 = ___",
+    "antwoord": "7",
+    "moeilijk": 2,
+    "hint": "Denk aan: 6 × ? = 42",
+    "uitleg": "42 ÷ 6 = 7. Dit is de omgekeerde van 6 × 7 = 42!"
+  },
+  {
+    "id": "g5_delen_002",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "mcq",
+    "vraag": "72 ÷ 8 = ?",
+    "opties": ["9", "8", "7", "10"],
+    "antwoord": "9",
+    "moeilijk": 2,
+    "hint": "8 × ? = 72",
+    "uitleg": "72 ÷ 8 = 9. Denk aan de tafel van 8: 8 × 9 = 72"
+  },
+  {
+    "id": "g5_delen_003",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "invul",
+    "vraag": "56 ÷ 7 = ___",
+    "antwoord": "8", 
+    "moeilijk": 2,
+    "hint": "7 × ? = 56",
+    "uitleg": "56 ÷ 7 = 8. De omgekeerde van 7 × 8 = 56"
+  },
+  {
+    "id": "g5_delen_004",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "mcq",
+    "vraag": "54 ÷ 9 = ?",
+    "opties": ["5", "6", "7", "8"],
+    "antwoord": "6",
+    "moeilijk": 2,
+    "hint": "9 × ? = 54",
+    "uitleg": "54 ÷ 9 = 6. Uit de tafel van 9: 9 × 6 = 54"
+  },
+  {
+    "id": "g5_delen_005",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "invul",
+    "vraag": "36 ÷ 4 = ___",
+    "antwoord": "9",
+    "moeilijk": 1,
+    "hint": "4 × ? = 36",
+    "uitleg": "36 ÷ 4 = 9. Uit de tafel van 4: 4 × 9 = 36"
+  },
+  {
+    "id": "g5_delen_006", 
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "mcq",
+    "vraag": "48 ÷ 6 = ?",
+    "opties": ["7", "8", "9", "6"],
+    "antwoord": "8",
+    "moeilijk": 2,
+    "hint": "6 × ? = 48",
+    "uitleg": "48 ÷ 6 = 8. De omgekeerde van 6 × 8 = 48"
+  },
+  {
+    "id": "g5_delen_007",
+    "leeftijd": 10,
+    "categorie": "delen", 
+    "type": "invul",
+    "vraag": "44 ÷ 11 = ___",
+    "antwoord": "4",
+    "moeilijk": 2,
+    "hint": "11 × ? = 44",
+    "uitleg": "44 ÷ 11 = 4. Herken je het patroon bij 11? 11 × 4 = 44"
+  },
+  {
+    "id": "g5_delen_008",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "mcq",
+    "vraag": "49 ÷ 7 = ?",
+    "opties": ["6", "7", "8", "9"],
+    "antwoord": "7",
+    "moeilijk": 2,
+    "hint": "7 × ? = 49",
+    "uitleg": "49 ÷ 7 = 7. Dit is 7 × 7 = 49, dus 49 ÷ 7 = 7"
+  },
+  {
+    "id": "g5_delen_009",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "invul",
+    "vraag": "81 ÷ 9 = ___",
+    "antwoord": "9",
+    "moeilijk": 3,
+    "hint": "9 × ? = 81",
+    "uitleg": "81 ÷ 9 = 9. Dit is 9 × 9 = 81, dus 81 ÷ 9 = 9"
+  },
+  {
+    "id": "g5_delen_010",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "mcq",
+    "vraag": "35 ÷ 5 = ?", 
+    "opties": ["6", "7", "8", "9"],
+    "antwoord": "7",
+    "moeilijk": 1,
+    "hint": "5 × ? = 35",
+    "uitleg": "35 ÷ 5 = 7. Uit de tafel van 5: 5 × 7 = 35"
+  },
+  {
+    "id": "g5_delen_011",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "invul",
+    "vraag": "24 ÷ 3 = ___",
+    "antwoord": "8",
+    "moeilijk": 1,
+    "hint": "3 × ? = 24",
+    "uitleg": "24 ÷ 3 = 8. Uit de tafel van 3: 3 × 8 = 24"
+  },
+  {
+    "id": "g5_delen_012",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "mcq",
+    "vraag": "63 ÷ 7 = ?",
+    "opties": ["8", "9", "10", "7"],
+    "antwoord": "9",
+    "moeilijk": 2,
+    "hint": "7 × ? = 63",
+    "uitleg": "63 ÷ 7 = 9. Uit de tafel van 7: 7 × 9 = 63"
+  },
+  {
+    "id": "g5_delen_013",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "invul",
+    "vraag": "100 ÷ 10 = ___",
+    "antwoord": "10",
+    "moeilijk": 1,
+    "hint": "Door 10 delen = laatste cijfer weghalen",
+    "uitleg": "100 ÷ 10 = 10. Bij delen door 10 haal je gewoon het laatste cijfer weg!"
+  },
+  {
+    "id": "g5_delen_014",
+    "leeftijd": 10,
+    "categorie": "delen",
+    "type": "mcq",
+    "vraag": "60 ÷ 12 = ?",
+    "opties": ["4", "5", "6", "7"],
+    "antwoord": "5",
+    "moeilijk": 3,
+    "hint": "12 × ? = 60",
+    "uitleg": "60 ÷ 12 = 5. Een beetje moeilijker: 12 × 5 = 60"
+  }
+]

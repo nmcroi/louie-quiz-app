@@ -1,0 +1,14 @@
+[
+  {
+    "id": "g2_rekenen_001",
+    "leeftijd": 6,
+    "categorie": "Rekenen",
+    "kleur": "#4e9cff",
+    "type": "invul",
+    "vraag": "Wat is 2 + 3?",
+    "antwoord": "5",
+    "hint": "Tel met je vingers.",
+    "uitleg": "2 plus 3 is samen 5.",
+    "moeilijk": 1
+  }
+] 

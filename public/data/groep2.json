@@ -1,0 +1,20 @@
+[
+  {
+    "id":"g2_001",
+    "type":"mcq",
+    "vraag":"Welk woord past bij het plaatje?",
+    "plaatje":"images/kat.png",
+    "opties":["kat","vis","boom"],
+    "antwoord":"kat",
+    "moeilijk":1
+  },
+  {
+    "id":"g2_002",
+    "type":"mcq",
+    "vraag":"Welke letter hoor je aan het begin van het woord 'boom'?",
+    "plaatje":"images/boom.png",
+    "opties":["b","k","v"],
+    "antwoord":"b",
+    "moeilijk":2
+  }
+] 

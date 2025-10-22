@@ -1,0 +1,16 @@
+[
+  {
+    "id": "g2_dieren_001",
+    "leeftijd": 6,
+    "categorie": "Dieren",
+    "kleur": "#FFB347",
+    "type": "mcq",
+    "vraag": "Welk woord past bij het plaatje?",
+    "plaatje": "images/kat.png",
+    "opties": ["kat", "vis", "boom"],
+    "antwoord": "kat",
+    "hint": "Let op de eerste letter",
+    "uitleg": "Dit is een kat. Kat begint met de letter k.",
+    "moeilijk": 1
+  }
+] 

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "g5_dieren_001",
+    "leeftijd": 10,
+    "categorie": "Dieren",
+    "kleur": "#FFB347",
+    "type": "mcq",
+    "vraag": "Wat is het grootste landdier?",
+    "opties": ["olifant", "giraf", "leeuw"],
+    "antwoord": "olifant",
+    "hint": "Het dier heeft een slurf.",
+    "uitleg": "De olifant is het grootste landdier.",
+    "moeilijk": 2
+  }
+] 

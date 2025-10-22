@@ -1,0 +1,17 @@
+[
+  {
+    "id":"g5_001",
+    "type":"invul",
+    "vraag":"7 × 8 = ___",
+    "antwoord":"56",
+    "moeilijk":2
+  },
+  {
+    "id":"g5_002",
+    "type":"mcq",
+    "vraag":"Wat is het meervoud van 'museum'?",
+    "opties":["musea","museums","museumen"],
+    "antwoord":"musea",
+    "moeilijk":1
+  }
+] 
